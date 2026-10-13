@@ -27,11 +27,10 @@
 - 가운데 : 과정별 요약 카드 (신청 인원 / 정원, 마감 배지)
 - 하단 : 신청 목록 표, 그 아래 개인별 누적 이수 시간 표
 
-## 5. 데이터 구조 (Supabase 표)
-- edu_apps    : id, course, date, hours, name, team, status(신청/이수/취소), created_at
-- edu_courses : course, capacity
-- 화면 코드에서는 created_at을 createdAt으로 바꿔 쓴다.
-- 가상 신청 8건, 가상 과정 3개(정원 5명)는 supabase.sql 실행 시 한 번 넣는다.
+## 5. 데이터 구조 (localStorage)
+- edu_apps    : [{ id, course, date, hours, name, team, status(신청/이수/취소), createdAt }]
+- edu_courses : [{ course, capacity }]
+- 처음 실행 시 가상 신청 8건, 가상 과정 3개(정원 5명)를 넣는다.
 
 ## 6. 업무 규칙
 - R-01 중복 : 이름(앞뒤 공백 제거)과 과정이 같고 상태가 '취소'가 아닌 신청이 있으면 거부
@@ -40,10 +39,10 @@
 - R-04 상태 변경 : 신청 → 이수, 신청 → 취소만 가능. 이수·취소는 더 이상 변경 불가
 
 ## 7. 제약 조건
-- 별도 서버·로그인 없이 동작 (데이터는 Supabase에 저장), 화면 문구는 한국어, 신청자는 가상 이름만
+- 서버·로그인 없이 동작, 화면 문구는 한국어, 신청자는 가상 이름만
 
 ## 8. 범위 밖 (이번에 만들지 않음)
-- 로그인·권한, 결재 연동, 메일 알림
+- 로그인·권한, 결재 연동, 메일 알림, 여러 PC 간 데이터 공유
 
 ## 9. 개발 단계
 - Phase 1 : F-01~F-03  /  Phase 2 : F-04~F-06  /  Phase 3 : F-07~F-08

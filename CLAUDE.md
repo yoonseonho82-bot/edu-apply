@@ -5,10 +5,9 @@
 - PRD.md에 없는 기능은 먼저 제안하고, 내가 승인한 뒤에만 구현한다.
 
 ## 기술 스택 (변경 금지)
-- HTML + CSS + 순수 JavaScript만 사용한다. (React 등 프레임워크, 빌드 도구 사용 금지)
-- 외부 CDN은 supabase-js 하나만 허용한다. (버전 고정)
-- 별도 서버 없이 index.html을 더블클릭하면 실행되어야 한다.
-- 데이터는 Supabase 표(edu_apps, edu_courses)에 저장한다. 표 만들기 SQL은 supabase.sql에 둔다.
+- HTML + CSS + 순수 JavaScript만 사용한다. (React 등 프레임워크, 빌드 도구, 외부 CDN 사용 금지)
+- 서버 없이 index.html을 더블클릭하면 실행되어야 한다.
+- 데이터는 브라우저 localStorage에 저장한다.
 
 ## 폴더 구조
 - index.html : 화면 구조
@@ -16,8 +15,7 @@
 - logic.js   : 계산·판정 규칙만 (화면을 다루는 코드 금지)
 - app.js     : 화면 동작 (입력 받기, 목록 그리기, 버튼 이벤트)
 - test.html  : logic.js 자동 테스트 (완료 기준 T-xx를 PASS/FAIL 표로 표시)
-- supabase.sql : Supabase SQL Editor에서 실행할 표·정책·가상 데이터
-- index.html은 supabase-js(CDN) → logic.js → app.js 순서로 불러온다.
+- index.html은 logic.js → app.js 순서로 불러온다.
 
 ## 작업 방식
 1. 코드를 고치기 전에 계획(수정할 파일·함수와 이유)을 먼저 보여주고 승인을 받는다.
@@ -34,8 +32,7 @@
 
 ## 보안·데이터 규칙
 - 가상 데이터만 사용한다. 실제 이름·연락처·기관 내부자료를 코드와 샘플에 넣지 않는다.
-- Supabase 표·열 이름은 PRD.md 5장을 따른다.
-- 코드에는 publishable(공개용) 키만 넣는다. secret / service_role 키는 절대 넣지 않는다.
+- localStorage 키 이름은 PRD.md 5장을 따른다.
 
 ## 프로젝트 전용 규칙
 ### 이름 표
@@ -49,7 +46,7 @@
 ### 주의사항
 - 이름 비교는 반드시 앞뒤 공백을 제거한 뒤 한다. (R-01)
 - 정원 계산에서 '취소' 건은 빼고 센다. (R-02)
-- 데이터를 읽고 쓰는 코드는 app.js '저장 위치' 구역의 함수 4개에만 둔다. 화면 함수는 Supabase를 직접 부르지 않는다.
+- 데이터를 읽고 쓰는 코드는 app.js '저장 위치' 구역의 함수 4개에만 둔다. 화면 함수는 localStorage를 직접 부르지 않는다.
 
 ## 자주 발생한 오류와 해결 (Debug Loop에서 배운 것 – 계속 추가)
 - getElementById 결과는 사용 전에 있는지 확인하고, 없으면 콘솔에 '요소 없음: id'를 표시한다.
